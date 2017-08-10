@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>查看用户</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery-form.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/login.css"/>
+    <script type="text/javascript" src="js/sweetalert-dev.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/sweetalert.css"/>
+
+
+</head>
+<body>
+
+	<div class="header">
+        <div class="col-xs-offset-2 col-xs-8" id="#loginForm">
+            <h1>欢迎来到图书馆</h1>
+        </div>
+    </div>
+
+	
+
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery-form.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+	<form class="form-horizontal" id="searchForm">
+	    <div class="input-group">
+			<input type="text" class="form-control "><span class="input-group-addon btn btn-primary" id="searchUser">搜索</span>
+		</div>
+	</form>	
+    <form class="form-horizontal" id="loginForm" method="post">
+        <!-- <input type="button" value="book" id="check"> -->
+        <div class="container">
+	                  
+		<table class="table table-hover" id="table">
+			<thead>
+				<tr>
+					<th>账户名</th>
+					<th>密码</th>
+					
+				</tr>
+			</thead>
+			<tbody id="tab">
+				
+			</tbody>
+		</table>
+    </form>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+           
+
+
+            // $("#check").click(function () {
+                $("#loginForm").ajaxSubmit({
+                    url: "./listAccount.do",
+                    type:"POST",
+                    dataType:"json",
+                    success:function(data){
+                        var tab='';
+                        for(var i = 0; i< data.length; i++){
+                            tab+="<tr><td>" + data[i].loginName + "</td>";                            
+                           
+                            tab+="<td>" + data[i].loginPassword + "</td></tr>";                            
+                           
+                            $("#tab").html(tab);
+
+                        }
+                        
+
+                    }
+                // });
+            });
+
+                
+
+                
+            // });
+        	
+        });
+    </script>
+</body>
+</html>

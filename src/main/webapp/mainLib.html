@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>图书馆</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery-form.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/login.css"/>
+    <script type="text/javascript" src="js/sweetalert-dev.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/sweetalert.css"/>
+
+
+</head>
+<body>
+
+	<div class="header">
+        <div class="col-xs-offset-2 col-xs-8" id="#loginForm">
+            <h1>欢迎来到图书馆</h1>
+        </div>
+    </div>
+
+	
+
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery-form.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+	<form class="form-horizontal" id="searchForm">
+	    <div class="input-group">
+			<input type="text" class="form-control " id="bookName" name="bookName"><span class="input-group-addon btn btn-primary" id="search">搜索</span>
+		</div>
+	</form>	
+    <form class="form-horizontal" id="loginForm" method="post">
+        <!-- <input type="button" value="book" id="check"> -->
+        <div class="container">
+	                  
+            <table class="table table-hover" id="table">
+                <thead>
+                    <tr>
+                        <th>书名</th>
+                        <th>作者</th>
+                        <th>总数量</th>
+                        <th>当前数量</th>
+                    </tr>
+                </thead>
+                <tbody id="tab">
+
+                </tbody>
+            </table>
+        </div>
+    </form>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+        
+            $("#search").click(function() {
+
+            	$("#searchForm").ajaxSubmit({
+	            	url: "./searchBook.do",
+	                type:"POST",
+	                dataType:"json",
+	                success:function(data) {
+
+
+                        if (data != null) {
+                            var tab = '';
+                            tab += "书名: " + data.bookName + "\n";
+                            tab += "作者: " + data.bookAuthor + "\n";
+                            tab += "总数: " + data.bookTotalNum + "\n";
+                            tab += "当前数量: " + data.bookCurrentNum + "\n";
+
+                            swal({
+                                title: "书籍查询成功",
+                                text: tab,
+                                timer: 5000,
+                                type: "success",
+                                showConfirmButton: true
+                            });
+
+                        }
+                        else {
+
+                            swal({
+                                title: "查询失败",
+                                text: "书籍不存在",
+                                timer: 5000,
+                                type: "error",
+                                showConfirmButton: true
+
+                            });
+                        }
+
+                    },
+	            });
+            });
+
+
+            // $("#check").click(function () {
+                $("#loginForm").ajaxSubmit({
+                    url: "./listBook.do",
+                    type:"POST",
+                    dataType:"json",
+                    success:function(data){
+                        var tab='';
+                        for(var i = 0; i< data.length; i++){
+                            tab+="<tr><td>" + data[i].bookName + "</td>";                            
+                            tab+="<td>" + data[i].bookAuthor + "</td>";
+                            tab+="<td>" + data[i].bookTotalNum + "</td>";                            
+                            tab+="<td>" + data[i].bookCurrentNum + "</td>";
+                            tab+="<td><input type='button' value='借书' class='borrow'></td>";
+                            tab+="<td><input type='button' value='还书' class='return'></td></tr>";
+                            $("#tab").html(tab);
+
+                        }
+                        
+
+                    }
+                // });
+            });
+
+                
+				$(".borrow").click(function() {
+				            	alert("借书成功");
+				        });
+                
+            });
+        	
+    </script>
+</body>
+</html>

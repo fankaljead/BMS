@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>首页</title>
+	<meta name="viewport" content="user-scalable=no">
+	<meta charset="utf-8">
+	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap-theme.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/index.css"/>
+    <script type="text/javascript">
+    	var num = 5;
+        var i = setInterval(function() {
+            num --;
+            if (num == 0){
+                clearInterval(i);
+                self.location='login.html';
+				$(".footer").html("");
+            }
+
+           	$(".footer div").html(num+"S");
+
+        }, 1000);
+    </script>
+<body>
+<div class="firstPart">
+	<div id="Circle">
+	   <div id="cont">
+	      <div class="top">
+	         <div class="dome"></div>
+	         <div class="fan">
+	            <div class="fan_blade1"></div>
+	            <div class="fan_blade2"></div>
+	            <div class="fan_blade3"></div>
+	            <div class="fan_blade4"></div>
+	         </div>
+	         <div class="mill"></div>
+	         <div class="sky">
+	            <div class="tailstar"></div>
+	               <div class="stars"></div>
+	               <div class="moon"></div>
+	            </div>
+	         <div class="floor">
+	            <span class="tree1"></span>
+	            <span class="tree2"></span>
+	            <span class="tree3"></span>
+	         </div>
+	      </div>
+	      <div class="bottom">
+	         <div class="dome"></div>
+	         <div class="fan">
+	            <div class="fan_blade1"></div>
+	            <div class="fan_blade2"></div>
+	            <div class="fan_blade3"></div>
+	            <div class="fan_blade4"></div>
+	         </div>
+	         <div class="mill"></div>
+	         <div class="sky">
+	               <div class="stars"></div>
+	               <div class="moon"></div>
+	            </div>
+	         <div class="floor">
+	            <span class="tree1"></span>
+	            <span class="tree2"></span>
+	            <span class="tree3"></span>
+	         </div>>
+	      </div>
+	   </div>
+	</div>
+</div>
+<div class="secondPart">
+	<div class="container-fluid meddle">
+		<div class="row">
+			<h1 class="stroke col-xs-9 col-xs-push-3">细水长流</h1>
+		</div>
+		<div class="clearfix"></div>
+		<div class="row">
+			<h1 class="stroke col-xs-3 col-xs-push-7">积少成多</h1>
+		</div>
+	</div>
+</div>
+
+<div class="footer">
+	<div>5S</div><a href="login.html">跳过</a>
+</div>
+
+
+</body>
+</html>

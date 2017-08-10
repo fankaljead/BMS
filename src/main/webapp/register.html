@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery-form.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+    <script type="text/javascript" src="js/sweetalert-dev.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/sweetalert.css"/>
+    <style type="text/css">
+        body,html{
+            width: 100%;
+            height: 100%;
+            margin:0px;
+            padding:0px;
+            font-size: 17px;
+
+        }
+
+        body{
+            background: url("img/backgound1.jpg") center;
+
+        }
+
+        .header{
+            text-align: center;
+            padding-top: 10%;
+            color: #5cb85c;
+
+        }
+        label{
+            color: #67b168;
+        }
+        #container{
+            margin-left: 33%;
+
+        }
+        .btn{
+            font-size: 17px;
+
+        }
+        form{
+            padding: 10% 10%;
+            width: 50%;
+        }
+    </style>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+           $("#registerButton").click(function () {
+               var pswd1 = $("#loginPassword").val();
+               var pswd2 = $("#loginPassword2").val();
+               if(pswd1 != pswd2){
+
+                       swal({
+                           title: "注册失败, 前后密码不一致",
+                           text: "5秒后自动消失",
+                           timer: 5000,
+                           type:"error",
+                           showConfirmButton: true
+                       });
+
+               }
+               else{
+               $("#registerForm").ajaxSubmit({
+                   url: "./register.do",
+                   type:"POST",
+                   dataType:"json",
+                   error:function(data){
+                       swal({
+                           title: "服务器错误，请联系管理员",
+                           text: "5秒后自动消失",
+                           timer: 5000,
+                           type:"error",
+                           showConfirmButton: true
+                       });
+                   },
+                   success:function(data){
+                       if (data == '1'){
+                           swal({
+                               title: "注册成功！",
+                               text: "5秒后自动消失",
+                               timer: 5000,
+                               type:"success",
+                               showConfirmButton: true
+                           },function () {
+                               self.location='login.html';
+                           });
+                       }else if (data == "-1"){
+                           swal({
+                               title: "注册失败",
+                               text: "5秒后自动消失",
+                               timer: 5000,
+                               type:"error",
+                               showConfirmButton: true
+                           });
+                       }
+                   }
+               });
+               }
+           });
+        });
+    </script>
+</head>
+<body>
+
+<div class="header">
+    <div class="col-xs-offset-2 col-xs-8">
+        <h1>欢迎来到图书馆</h1>
+    </div>
+</div>
+<div class="container-fluid" id="container">
+    <form id="registerForm">
+        <div class="form-group">
+            <label for="loginName">登录名</label>
+            <input type="text" class="form-control" id="loginName" name="loginName" placeholder="请输入登录名">
+        </div>
+        <div class="form-group">
+            <label for="loginPassword">密码</label>
+            <input type="password" class="form-control" id="loginPassword" name="loginPassword" placeholder="请输入密码">
+        </div>
+        <div class="form-group">
+            <label for="loginPassword2">再次输入</label>
+            <input type="password" class="form-control" id="loginPassword2" name="loginPassword2" placeholder="请再次输入密码">
+        </div>
+        <div class="form-group" style="margin-top: 30px">
+            <div class="col-xs-offset-1 col-xs-6">
+                <button type="button" class="btn btn-default align-left" id="registerButton">提交</button>
+            </div>
+            <div class="col-xs-5">
+                <button type="reset" class="btn btn-default">重置</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+</body>
+</html>

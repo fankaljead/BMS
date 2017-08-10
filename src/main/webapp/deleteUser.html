@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>删除用户</title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+	<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="js/jquery-form.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+    <link rel="stylesheet" type="text/css" href="css/login.css"/>
+    <script type="text/javascript" src="js/sweetalert-dev.js"></script>
+    <link rel="stylesheet" type="text/css" href="css/sweetalert.css"/>
+
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+        	$("#deleteButton").click(function () {
+
+        		$("#deleteForm").ajaxSubmit({
+                    url: "./delete.do",
+                    type:"POST",
+                    dataType:"json",
+                    error:function(data){
+                        swal({
+                            title: "服务器错误，请联系管理员",
+                            text: "5秒后自动消失",
+                            timer: 5000,
+                            type:"error",
+                            showConfirmButton: true
+                        });
+                    },
+                    success:function(data){
+                        if (data == '1'){
+                            swal({
+                                title: "用户删除成功",
+                                text: "5秒后自动消失",
+                                timer: 5000,
+                                type:"success",
+                                showConfirmButton: true
+                            });
+                        }else if (data == "0"){
+                            swal({
+                                title: "用户不存在",
+                                text: "5秒后自动消失",
+                                timer: 5000,
+                                type:"error",
+                                showConfirmButton: true
+                            });
+                        }else if(data == '-1'){
+                            swal({
+                                title: "服务器错误，请联系管理员",
+                                text: "5秒后自动消失",
+                                timer: 5000,
+                                type:"error",
+                                showConfirmButton: true
+                            });
+                        }
+                    }
+                });
+        	});
+        });
+    </script>
+
+
+    
+</head>
+<body>
+
+	<div class="header">
+        <div class="col-xs-offset-2 col-xs-8">
+            <h1>欢迎来到图书馆</h1>
+        </div>
+    </div>
+
+
+    <div class="container">
+	    <form class="form-horizontal" id="deleteForm" method="post">
+	        <div class="form-group">
+
+	          <div class="col-xs-offset-2 col-xs-8">
+	            <input type="text" class="form-control" id="loginName" name="loginName" placeholder="请输入用户名">
+	          </div>
+	        </div>
+	        
+	 
+	        <div class="form-group">
+	          <div class="col-xs-offset-2 col-xs-4">
+	            <button type="button" class="btn btn-default" id="deleteButton">确认删除</button>
+	          </div>
+	           
+	        </div>
+	    </form>
+    </div>
+	
+</body>
+</html>
