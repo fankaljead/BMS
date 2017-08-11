@@ -1,0 +1,23 @@
+ArrayList<Book> b = new ArrayList<Book>();
+        if (list == null || list.size() == 0) {
+
+            return null;
+        } else {
+            for (int i = 0; i < list.size(); i++) {
+
+                Book book = new Book();
+                Map<String, Object> map = list.get(i);
+                book.setID(map.get("ID").toString());
+                book.setBookName(map.get("BookName").toString());
+                book.setBookTotalNum(Integer.valueOf(map.get("BookTotalNum").toString()));
+                book.setBookAuthor(map.get("BookAuthor").toString());
+                book.setBookImageUrl(map.get("BookImageUrl").toString());
+                book.setBookBorrowedNum(Integer.valueOf(map.get("BookBorrowedNum").toString()));
+                book.setBookCurrentNum(Integer.valueOf(map.get("BookCurrentNum").toString()));
+
+                b.add(book);
+
+            }
+
+            return b;
+        }
